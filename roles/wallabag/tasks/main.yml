@@ -1,0 +1,23 @@
+---
+- name: Ensures the Wallabag folder exists
+  file:
+    path: "{{ wallabag_path }}"
+    state: directory
+
+- name: Create the Wallabag container
+  docker_container:
+    name: wallabag
+    image: wallabag/wallabag
+    restart_policy: unless-stopped
+    networks:
+      - name: web
+    volumes:
+      - "{{ wallabag_path }}/data:/var/www/wallabag/data"
+      - "{{ wallabag_path }}/images:/var/www/wallabag/web/assets/images"
+    labels:
+      traefik.backend: "wallabag"
+      traefik.docker.network: "web"
+      traefik.frontend.rule: "Host:{{ wallabag_root_url }}"
+      traefik.enable: "true"
+    env:
+      SYMFONY__ENV__DOMAIN_NAME: "https://{{ wallabag_root_url }}"
