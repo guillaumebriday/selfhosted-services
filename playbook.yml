@@ -1,0 +1,11 @@
+---
+- name: Install applications in Docker containers
+  hosts: webservers
+  vars:
+    freshrss_path: /var/www/freshrss
+    wallabag_path: /var/www/wallabag
+    wekan_path: /var/www/wekan
+  roles:
+    - freshrss
+    - wallabag
+    - wekan
