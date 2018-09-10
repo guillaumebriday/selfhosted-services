@@ -1,0 +1,9 @@
+[webservers]
+example.com
+
+[webservers:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+wekan_root_url=wekan.example.com
+freshrss_root_url=freshrss.example.com
+wallabag_root_url=wallabag.example.com
