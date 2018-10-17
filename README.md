@@ -11,7 +11,7 @@ This is an [Ansible](https://www.ansible.com) role to install self hosted servic
 This role is designed to install multiple services :
 
 + [Wekan](https://wekan.github.io/)
-+ [FreshRSS](https://freshrss.org/)
++ [Miniflux](https://github.com/miniflux/miniflux)
 + [Wallabag](https://wallabag.org/)
 
 ## Installing on production

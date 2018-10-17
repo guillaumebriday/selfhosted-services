@@ -2,10 +2,10 @@
 - name: Install applications in Docker containers
   hosts: webservers
   vars:
-    freshrss_path: /var/www/freshrss
+    miniflux_path: /var/www/miniflux
     wallabag_path: /var/www/wallabag
     wekan_path: /var/www/wekan
   roles:
-    - freshrss
+    - miniflux
     - wallabag
     - wekan

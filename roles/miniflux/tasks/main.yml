@@ -1,0 +1,40 @@
+---
+- name: Ensures the Miniflux folder exists
+  file:
+    path: "{{ miniflux_path }}"
+    state: directory
+
+- name: Create the Miniflux network
+  docker_network:
+    name: miniflux
+
+- name: Create the Postgres container
+  docker_container:
+    name: minifluxdb
+    image: postgres
+    restart_policy: unless-stopped
+    networks:
+      - name: miniflux
+    volumes:
+      - "{{ miniflux_path }}/data:/var/lib/postgresql/data"
+    env:
+      POSTGRES_USER: "miniflux"
+      POSTGRES_PASSWORD: "secret"
+
+- name: Create the Miniflux container
+  docker_container:
+    name: miniflux
+    image: miniflux/miniflux
+    restart_policy: unless-stopped
+    networks:
+      - name: web
+      - name: miniflux
+    labels:
+      traefik.backend: "miniflux"
+      traefik.docker.network: "web"
+      traefik.frontend.rule: "Host:{{ miniflux_root_url }}"
+      traefik.enable: "true"
+      traefik.port: "8080"
+    env:
+      DATABASE_URL: "postgres://miniflux:secret@minifluxdb/miniflux?sslmode=disable"
+      RUN_MIGRATIONS: "1"
