@@ -11,7 +11,7 @@
 - name: Create the Postgres container
   docker_container:
     name: minifluxdb
-    image: postgres
+    image: postgres:11
     restart_policy: unless-stopped
     networks:
       - name: miniflux
