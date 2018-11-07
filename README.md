@@ -10,6 +10,7 @@ This is an [Ansible](https://www.ansible.com) role to install self hosted servic
 
 This role is designed to install multiple services :
 
++ [Lobsters](https://github.com/lobsters/lobsters)
 + [Wekan](https://wekan.github.io/)
 + [Miniflux](https://github.com/miniflux/miniflux)
 + [Wallabag](https://wallabag.org/)

@@ -5,7 +5,9 @@
     miniflux_path: /var/www/miniflux
     wallabag_path: /var/www/wallabag
     wekan_path: /var/www/wekan
+    lobsters_path: /var/www/lobsters
   roles:
+    - lobsters
     - miniflux
     - wallabag
     - wekan

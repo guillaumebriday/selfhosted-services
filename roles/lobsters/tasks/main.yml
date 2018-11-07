@@ -1,0 +1,42 @@
+---
+- name: Ensures the lobsters folder exists
+  file:
+    path: "{{ lobsters_path }}"
+    state: directory
+
+- name: Create the lobsters network
+  docker_network:
+    name: lobsters
+
+- name: Create the Mysql container
+  docker_container:
+    name: lobsters-db
+    image: mysql:5.7
+    restart_policy: unless-stopped
+    networks:
+      - name: lobsters
+    env:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lobsters
+    volumes:
+      - "{{ lobsters_path }}/data:/var/lib/mysql"
+
+- name: Create the lobsters container
+  docker_container:
+    name: lobsters
+    image: guillaumebriday/lobsters-docker
+    restart_policy: unless-stopped
+    networks:
+      - name: lobsters
+      - name: web
+    labels:
+      traefik.backend: "lobsters"
+      traefik.docker.network: "web"
+      traefik.frontend.rule: "Host:{{ lobsters_root_url }}"
+      traefik.enable: "true"
+      traefik.port: "3000"
+    env:
+      RAILS_SERVE_STATIC_FILES: true
+      APP_DOMAIN: "{{ lobsters_root_url }}"
+      APP_NAME: "Guillaume's Lobsters"
+
