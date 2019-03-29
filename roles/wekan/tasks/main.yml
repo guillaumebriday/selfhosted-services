@@ -19,9 +19,9 @@
       - "{{ wekan_path }}/data:/data/db"
       - "{{ wekan_path }}/dump:/dump"
 
-- name: Create the Wekan container
+- name: Create the Wekan containers
   docker_container:
-    name: wekan
+    name: "wekan-{{ item }}"
     image: wekanteam/wekan
     restart_policy: unless-stopped
     networks:
@@ -33,6 +33,8 @@
       traefik.frontend.rule: "Host:{{ wekan_root_url }}"
       traefik.enable: "true"
       traefik.port: "8080"
+      traefik.backend.loadbalancer.stickiness: "true"
     env:
       ROOT_URL: https://{{ wekan_root_url }}
       MONGO_URL: mongodb://wekandb:27017/wekan
+  with_sequence: count=2

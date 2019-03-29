@@ -21,9 +21,9 @@
       POSTGRES_USER: "miniflux"
       POSTGRES_PASSWORD: "secret"
 
-- name: Create the Miniflux container
+- name: Create the Miniflux containers
   docker_container:
-    name: miniflux
+    name: "miniflux-{{ item }}"
     image: miniflux/miniflux
     restart_policy: unless-stopped
     networks:
@@ -35,6 +35,8 @@
       traefik.frontend.rule: "Host:{{ miniflux_root_url }}"
       traefik.enable: "true"
       traefik.port: "8080"
+      traefik.backend.loadbalancer.stickiness: "true"
     env:
       DATABASE_URL: "postgres://miniflux:secret@minifluxdb/miniflux?sslmode=disable"
       RUN_MIGRATIONS: "1"
+  with_sequence: count=2

@@ -21,9 +21,9 @@
     volumes:
       - "{{ lobsters_path }}/data:/var/lib/mysql"
 
-- name: Create the lobsters container
+- name: Create the lobsters containers
   docker_container:
-    name: lobsters
+    name: "lobsters-{{ item }}"
     image: guillaumebriday/lobsters-docker
     restart_policy: unless-stopped
     networks:
@@ -35,8 +35,10 @@
       traefik.frontend.rule: "Host:{{ lobsters_root_url }}"
       traefik.enable: "true"
       traefik.port: "3000"
+      traefik.backend.loadbalancer.stickiness: "true"
     env:
-      RAILS_SERVE_STATIC_FILES: true
+      RAILS_SERVE_STATIC_FILES: "true"
       APP_DOMAIN: "{{ lobsters_root_url }}"
       APP_NAME: "Guillaume's Lobsters"
+  with_sequence: count=2
 

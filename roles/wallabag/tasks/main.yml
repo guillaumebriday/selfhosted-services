@@ -4,9 +4,9 @@
     path: "{{ wallabag_path }}"
     state: directory
 
-- name: Create the Wallabag container
+- name: Create the Wallabag containers
   docker_container:
-    name: wallabag
+    name: "wallabag-{{ item }}"
     image: wallabag/wallabag
     restart_policy: unless-stopped
     networks:
@@ -19,5 +19,7 @@
       traefik.docker.network: "web"
       traefik.frontend.rule: "Host:{{ wallabag_root_url }}"
       traefik.enable: "true"
+      traefik.backend.loadbalancer.stickiness: "true"
     env:
       SYMFONY__ENV__DOMAIN_NAME: "https://{{ wallabag_root_url }}"
+  with_sequence: count=2
