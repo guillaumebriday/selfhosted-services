@@ -7,3 +7,4 @@ ansible_python_interpreter=/usr/bin/python3
 miniflux_root_url=miniflux.example.com
 wallabag_root_url=wallabag.example.com
 wekan_root_url=wekan.example.com
+lobsters_root_url=lobsters.example.com
