@@ -32,7 +32,7 @@
     labels:
       traefik.backend: "miniflux"
       traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:{{ miniflux_root_url }}"
+      traefik.frontend.rule: "Host:miniflux.{{ domain_url }}"
       traefik.enable: "true"
       traefik.port: "8080"
       traefik.backend.loadbalancer.stickiness: "true"

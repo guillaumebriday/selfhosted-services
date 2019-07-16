@@ -17,9 +17,9 @@
     labels:
       traefik.backend: "wallabag"
       traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:{{ wallabag_root_url }}"
+      traefik.frontend.rule: "Host:wallabag.{{ domain_url }}"
       traefik.enable: "true"
       traefik.backend.loadbalancer.stickiness: "true"
     env:
-      SYMFONY__ENV__DOMAIN_NAME: "https://{{ wallabag_root_url }}"
+      SYMFONY__ENV__DOMAIN_NAME: "https://wallabag.{{ domain_url }}"
   with_sequence: count=2

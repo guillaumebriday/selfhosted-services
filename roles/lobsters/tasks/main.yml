@@ -32,13 +32,13 @@
     labels:
       traefik.backend: "lobsters"
       traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:{{ lobsters_root_url }}"
+      traefik.frontend.rule: "Host:lobsters.{{ domain_url }}"
       traefik.enable: "true"
       traefik.port: "3000"
       traefik.backend.loadbalancer.stickiness: "true"
     env:
       RAILS_SERVE_STATIC_FILES: "true"
-      APP_DOMAIN: "{{ lobsters_root_url }}"
+      APP_DOMAIN: "lobsters.{{ domain_url }}"
       APP_NAME: "Guillaume's Lobsters"
   with_sequence: count=2
 

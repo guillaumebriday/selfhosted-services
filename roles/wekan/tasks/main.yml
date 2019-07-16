@@ -30,11 +30,11 @@
     labels:
       traefik.backend: "wekan"
       traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:{{ wekan_root_url }}"
+      traefik.frontend.rule: "Host:wekan.{{ domain_url }}"
       traefik.enable: "true"
       traefik.port: "8080"
       traefik.backend.loadbalancer.stickiness: "true"
     env:
-      ROOT_URL: https://{{ wekan_root_url }}
+      ROOT_URL: https://wekan.{{ domain_url }}
       MONGO_URL: mongodb://wekandb:27017/wekan
   with_sequence: count=2
