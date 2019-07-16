@@ -9,6 +9,7 @@
     name: "wallabag-{{ item }}"
     image: wallabag/wallabag
     restart_policy: unless-stopped
+    pull: true
     networks:
       - name: web
     volumes:

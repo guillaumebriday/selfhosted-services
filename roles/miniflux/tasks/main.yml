@@ -13,6 +13,7 @@
     name: minifluxdb
     image: postgres:11
     restart_policy: unless-stopped
+    pull: true
     networks:
       - name: miniflux
     volumes:
@@ -26,6 +27,7 @@
     name: "miniflux-{{ item }}"
     image: miniflux/miniflux
     restart_policy: unless-stopped
+    pull: true
     networks:
       - name: web
       - name: miniflux

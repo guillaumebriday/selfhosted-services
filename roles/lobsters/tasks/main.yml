@@ -13,6 +13,7 @@
     name: lobsters-db
     image: mysql:5.7
     restart_policy: unless-stopped
+    pull: true
     networks:
       - name: lobsters
     env:
@@ -26,6 +27,7 @@
     name: "lobsters-{{ item }}"
     image: guillaumebriday/lobsters-docker
     restart_policy: unless-stopped
+    pull: true
     networks:
       - name: lobsters
       - name: web
