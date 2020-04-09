@@ -20,13 +20,13 @@ This role is designed to install multiple services :
 Copy the hosts example file and change the values to your needs :
 
 ```bash
-$ cp hosts.example hosts
+$ cp hosts.example.ini hosts.ini
 ```
 
 Set your variables then run the playbook :
 
 ```bash
-$ ansible-playbook -i hosts playbook.yml
+$ ansible-playbook -i hosts.ini playbook.yml
 ```
 
 ## Contributing
