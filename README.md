@@ -4,7 +4,10 @@ This is an [Ansible](https://www.ansible.com) role to install self hosted servic
 
 ## Requirements
 
-+ Ansible >= 2.4.0.0
++ Ansible >= 2.5
++ Traefik 2.x
+
+You can deploy Docker and Traefik with my [traefik-docker-ansible](https://github.com/guillaumebriday/traefik-docker-ansible) playbook.
 
 ## Applications
 
