@@ -27,6 +27,9 @@ Set your variables then run the playbook :
 
 ```bash
 $ ansible-playbook -i hosts.ini playbook.yml
+
+# For one application only
+$ ansible-playbook -i hosts.ini playbook.yml --tags "wallabag"
 ```
 
 ## Contributing

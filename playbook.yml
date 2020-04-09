@@ -7,7 +7,7 @@
     wekan_path: /var/www/wekan
     lobsters_path: /var/www/lobsters
   roles:
-    - lobsters
-    - miniflux
-    - wallabag
-    - wekan
+    - { role: lobsters, tags: lobsters }
+    - { role: miniflux, tags: miniflux }
+    - { role: wallabag, tags: wallabag }
+    - { role: wekan, tags: wekan }
