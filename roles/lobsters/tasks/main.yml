@@ -32,12 +32,12 @@
       - name: lobsters
       - name: web
     labels:
-      traefik.backend: "lobsters"
-      traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:lobsters.{{ domain_url }}"
       traefik.enable: "true"
-      traefik.port: "3000"
-      traefik.backend.loadbalancer.stickiness: "true"
+      traefik.docker.network: "web"
+      traefik.http.routers.lobsters.rule: "Host(`lobsters.{{ domain_url }}`)"
+      traefik.http.routers.lobsters.entrypoints: "websecure"
+      traefik.http.services.lobsters.loadbalancer.server.port: "3000"
+      traefik.http.services.lobsters.loadbalancer.sticky: "true"
     env:
       RAILS_SERVE_STATIC_FILES: "true"
       APP_DOMAIN: "lobsters.{{ domain_url }}"

@@ -32,12 +32,12 @@
       - name: web
       - name: miniflux
     labels:
-      traefik.backend: "miniflux"
-      traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:miniflux.{{ domain_url }}"
       traefik.enable: "true"
-      traefik.port: "8080"
-      traefik.backend.loadbalancer.stickiness: "true"
+      traefik.docker.network: "web"
+      traefik.http.routers.miniflux.rule: "Host(`miniflux.{{ domain_url }}`)"
+      traefik.http.routers.miniflux.entrypoints: "websecure"
+      traefik.http.services.miniflux.loadbalancer.server.port: "8080"
+      traefik.http.services.miniflux.loadbalancer.sticky: "true"
     env:
       DATABASE_URL: "postgres://miniflux:secret@minifluxdb/miniflux?sslmode=disable"
       RUN_MIGRATIONS: "1"

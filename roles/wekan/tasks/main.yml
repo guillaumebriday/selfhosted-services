@@ -30,12 +30,12 @@
       - name: wekan
       - name: web
     labels:
-      traefik.backend: "wekan"
-      traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:wekan.{{ domain_url }}"
       traefik.enable: "true"
-      traefik.port: "8080"
-      traefik.backend.loadbalancer.stickiness: "true"
+      traefik.docker.network: "web"
+      traefik.http.routers.wekan.rule: "Host(`wekan.{{ domain_url }}`)"
+      traefik.http.routers.wekan.entrypoints: "websecure"
+      traefik.http.services.wekan.loadbalancer.server.port: "8080"
+      traefik.http.services.wekan.loadbalancer.sticky: "true"
     env:
       ROOT_URL: https://wekan.{{ domain_url }}
       MONGO_URL: mongodb://wekandb:27017/wekan

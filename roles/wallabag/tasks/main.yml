@@ -16,11 +16,11 @@
       - "{{ wallabag_path }}/data:/var/www/wallabag/data"
       - "{{ wallabag_path }}/images:/var/www/wallabag/web/assets/images"
     labels:
-      traefik.backend: "wallabag"
-      traefik.docker.network: "web"
-      traefik.frontend.rule: "Host:wallabag.{{ domain_url }}"
       traefik.enable: "true"
-      traefik.backend.loadbalancer.stickiness: "true"
+      traefik.docker.network: "web"
+      traefik.http.routers.wallabag.rule: "Host(`wallabag.{{ domain_url }}`)"
+      traefik.http.routers.wallabag.entrypoints: "websecure"
+      traefik.http.services.wallabag.loadbalancer.sticky: "true"
     env:
       SYMFONY__ENV__DOMAIN_NAME: "https://wallabag.{{ domain_url }}"
   with_sequence: count=2
