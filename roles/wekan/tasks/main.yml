@@ -22,7 +22,7 @@
 
 - name: Create the Wekan containers
   docker_container:
-    name: "wekan-{{ item }}"
+    name: wekan
     image: wekanteam/wekan
     restart_policy: unless-stopped
     pull: true
@@ -35,8 +35,6 @@
       traefik.http.routers.wekan.rule: "Host(`wekan.{{ domain_url }}`)"
       traefik.http.routers.wekan.entrypoints: "websecure"
       traefik.http.services.wekan.loadbalancer.server.port: "8080"
-      traefik.http.services.wekan.loadbalancer.sticky: "true"
     env:
       ROOT_URL: https://wekan.{{ domain_url }}
       MONGO_URL: mongodb://wekandb:27017/wekan
-  with_sequence: count=2

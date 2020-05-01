@@ -6,7 +6,7 @@
 
 - name: Create the Wallabag containers
   docker_container:
-    name: "wallabag-{{ item }}"
+    name: wallabag
     image: wallabag/wallabag
     restart_policy: unless-stopped
     pull: true
@@ -20,7 +20,5 @@
       traefik.docker.network: "web"
       traefik.http.routers.wallabag.rule: "Host(`wallabag.{{ domain_url }}`)"
       traefik.http.routers.wallabag.entrypoints: "websecure"
-      traefik.http.services.wallabag.loadbalancer.sticky: "true"
     env:
       SYMFONY__ENV__DOMAIN_NAME: "https://wallabag.{{ domain_url }}"
-  with_sequence: count=2

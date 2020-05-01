@@ -24,7 +24,7 @@
 
 - name: Create the Miniflux containers
   docker_container:
-    name: "miniflux-{{ item }}"
+    name: miniflux
     image: miniflux/miniflux
     restart_policy: unless-stopped
     pull: true
@@ -37,8 +37,6 @@
       traefik.http.routers.miniflux.rule: "Host(`miniflux.{{ domain_url }}`)"
       traefik.http.routers.miniflux.entrypoints: "websecure"
       traefik.http.services.miniflux.loadbalancer.server.port: "8080"
-      traefik.http.services.miniflux.loadbalancer.sticky: "true"
     env:
       DATABASE_URL: "postgres://miniflux:secret@minifluxdb/miniflux?sslmode=disable"
       RUN_MIGRATIONS: "1"
-  with_sequence: count=2
