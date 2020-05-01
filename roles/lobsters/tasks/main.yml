@@ -24,7 +24,7 @@
 
 - name: Create the lobsters containers
   docker_container:
-    name: "lobsters-{{ item }}"
+    name: lobsters
     image: guillaumebriday/lobsters-docker
     restart_policy: unless-stopped
     pull: true
@@ -37,10 +37,8 @@
       traefik.http.routers.lobsters.rule: "Host(`lobsters.{{ domain_url }}`)"
       traefik.http.routers.lobsters.entrypoints: "websecure"
       traefik.http.services.lobsters.loadbalancer.server.port: "3000"
-      traefik.http.services.lobsters.loadbalancer.sticky: "true"
     env:
       RAILS_SERVE_STATIC_FILES: "true"
       APP_DOMAIN: "lobsters.{{ domain_url }}"
       APP_NAME: "Guillaume's Lobsters"
-  with_sequence: count=2
 
