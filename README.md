@@ -1,5 +1,7 @@
 # Ansible role for my self hosted services with Docker and Traefik
 
+![](https://github.com/guillaumebriday/selfhosted-services/workflows/Lint/badge.svg)
+
 This is an [Ansible](https://www.ansible.com) role to install self hosted services in [Docker](https://www.docker.com) containers with [Traefik](https://traefik.io).
 
 ## Requirements
