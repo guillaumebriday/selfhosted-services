@@ -41,4 +41,3 @@
       RAILS_SERVE_STATIC_FILES: "true"
       APP_DOMAIN: "lobsters.{{ domain_url }}"
       APP_NAME: "Guillaume's Lobsters"
-
