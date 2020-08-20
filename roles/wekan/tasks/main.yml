@@ -11,7 +11,7 @@
 - name: Create the Mongodb container
   docker_container:
     name: wekandb
-    image: mongo
+    image: mongo:4.4
     restart_policy: unless-stopped
     pull: true
     networks:
