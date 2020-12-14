@@ -7,7 +7,7 @@
 - name: Create the Wallabag containers
   docker_container:
     name: wallabag
-    image: wallabag/wallabag
+    image: wallabag/wallabag:2.3.8
     restart_policy: unless-stopped
     pull: true
     networks:
